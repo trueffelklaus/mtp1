@@ -1,6 +1,7 @@
 import React from 'react';
-import {Text, View, Button, Image, TouchableOpacity, AppRegistry} from 'react-native';
+import {Text, View, Button, Image, TouchableOpacity, AppRegistry, StyleSheet} from 'react-native';
 import PhotoGrid from 'react-native-photo-grid';
+import PTRView from 'react-native-pull-to-refresh'
 
 export default class UserSearch extends React.Component {
 
@@ -14,18 +15,21 @@ export default class UserSearch extends React.Component {
   }
 
 
+fetchData = async() =>{
+      let items = Array.apply(null, Array(18)).map((v, i) => {
+       return { id: i, src: 'https://picsum.photos/200'}
+      });
+      this.setState({ items });
+  };
 
-componentDidMount() {
-    // Build an array of 10 photos
-    let items = Array.apply(null, Array(10)).map((v, i) => {
-      // return { source = {require('./Bild01')}}
-     return { id: i, src: 'https://www.sengaa.blog/wp-content/uploads/2016/09/Breaks_Gin-2.png'}
-    });
-    this.setState({ items });
-  }
+componentDidMount(){
+    		this.fetchData();
+    }
+
 
 render(){
   return(
+
     <PhotoGrid
       data = { this.state.items }
       itemsPerRow = { 3 }
